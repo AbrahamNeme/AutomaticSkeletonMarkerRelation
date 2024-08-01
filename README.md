@@ -29,17 +29,18 @@ Die Hauptidee besteht darin, zunächst das SMPL-Modell auf die Tiefenaufnahmen z
 
 ## Dependencies
 
-- **Boost 1.58:** Boost C++ Bibliothek ist eine Sammlung von hochqualitativen, plattformübergreifenden C++ Bibliotheken, die oft als Erweiterungen der Standardbibliothek dienen. Sie bietet Lösungen für eine Vielzahl von Programmieraufgaben, darunter Datenstrukturen, Algorithmen, Multithreading, und vieles mehr. Boost wird häufig als Grundlage für die Entwicklung von C++ Projekten verwendet und ist bekannt für seine robuste und gut getestete Implementierung.
+- **Boost 1.58:** Boost ist eine Sammlung von hochqualitativen, plattformübergreifenden C++ Bibliotheken, die oft als Erweiterungen der Standardbibliothek dienen. Sie bietet Lösungen für eine Vielzahl von Programmieraufgaben, darunter Datenstrukturen, Algorithmen, Multithreading, und vieles mehr. Boost wird häufig als Grundlage für die Entwicklung von C++ Projekten verwendet und ist bekannt für seine robuste und gut getestete Implementierung.
 
-- OpenCV 3.3+ (OpenCV 4 wird nicht unterstützt)
-- Eigen 3.3.4
-- Ceres Solver 1.14 (Ceres 2 wird nicht unterstützt)
+- **OpenCV 3.3+ (OpenCV 4 wird nicht unterstützt):** Eine umfangreiche Open-Source-Bibliothek, die für Echtzeit-Computer-Vision-Anwendungen entwickelt wurde. Sie bietet eine Vielzahl von Algorithmen und Funktionen zur Bildverarbeitung, Objekt- und Gesichtserkennung, Bewegungsverfolgung und vielem mehr.
 
-Dies ist sehr leistungsrelevant, und es wird dringend empfohlen, Ceres manuell mit LAPACK- und OpenMP-Unterstützung zu bauen. Wenn Sie einen Intel-Prozessor verwenden, wird ebenfalls empfohlen, MKL als BLAS/LAPACK zu verwenden. Andernfalls wird ATLAS empfohlen. Stellen Sie außerdem sicher, dass Sie Ceres im Release-Modus bauen.
+- **Eigen 3.3.4:** Eine vielseitige, plattformübergreifende C++ Bibliothek für lineare Algebra, die sich auf Matrizen- und Vektorenoperationen spezialisiert. Sie bietet leistungsstarke und flexible Tools für numerische Berechnungen, darunter Eigenwertprobleme und lineare Gleichungssysteme.
 
-- zlib, für das Lesen des SMPL npz-Modells
+- **Ceres Solver 1.14 (Ceres 2 wird nicht unterstützt):** eine leistungsstarke C++ Bibliothek zur Lösung von nichtlinearen Optimierungsproblemen. Sie wird oft in Bereichen wie Computer Vision und Robotik eingesetzt, um Probleme wie Kamerakalibrierung und 3D-Rekonstruktion zu lösen. Ceres Solver unterstützt verschiedene Optimierungsalgorithmen und bietet die Möglichkeit, mit großen und komplexen Datensätzen effizient umzugehen, insbesondere wenn sie mit LAPACK und OpenMP kompiliert wird.
 
-Eine der folgenden (optional, aber erforderlich für Live-Demo):
-- K4A (Azure Kinect SDK)
-- libfreenect2
-- PCL 1.8+, optional
+- **zlib:** Zlib ist eine weit verbreitete, plattformübergreifende C-Bibliothek zur Datenkompression. Sie bietet Funktionen zur schnellen und effizienten Komprimierung und Dekomprimierung von Daten, die in vielen Anwendungen und Dateiformaten verwendet werden, einschließlich PNG-Bilddateien und HTTP-Kommunikation. zlib ist bekannt für seine hohe Performance und geringe Speicheranforderungen, was es ideal für ressourcenbeschränkte Umgebungen macht.
+
+Eine der folgenden (erforderlich für Live-Demo):
+- **K4A:** Azure Kinect SDK ist eine Software-Entwicklungsplattform von Microsoft, die zur Nutzung und Steuerung der Azure Kinect Development Kit Hardware dient. Sie bietet APIs für den Zugriff auf die Tiefenkamera, die RGB-Kamera, den IMU-Sensor und das Mikrofonarray der Azure Kinect.
+- **libfreenect2:** Eine Open-Source-Bibliothek zur Ansteuerung und Nutzung der Kinect for Windows v2 (Kinect v2) Sensorhardware. Sie bietet Treiber und APIs, um auf die Tiefen-, Infrarot- und RGB-Kameradaten des Kinect v2 Sensors zuzugreifen.
+
+- **PCL 1.8+:** Point Cloud Library ist eine Open-Source-Bibliothek für die Verarbeitung und Analyse von Punktwolken. Sie bietet zahlreiche Algorithmen für Aufgaben wie Filterung, Merkmalsextraktion, Registrierung, Segmentierung und Visualisierung von 3D-Punktwolken. PCL wird häufig in der Robotik, Automatisierung und Computer Vision eingesetzt, um präzise 3D-Modelle und Umgebungswahrnehmung zu ermöglichen.
