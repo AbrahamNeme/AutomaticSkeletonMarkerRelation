@@ -15,8 +15,8 @@ Die Hauptidee besteht darin, zunächst das SMPL-Modell auf die Tiefenaufnahmen z
 ## Vorgehensweise
 
 1. **Untersuchung bestehender Ansätze:**
-   - Avatar Project - Anpassung von 3D-Modellen an reale Personen
-   - RVH Mesh Registration - Registrierung von 3D-Meshes auf reale Personen
+   - [Avatar Project](https://github.com/sxyu/avatar) - Anpassung von 3D-Modellen an reale Personen
+   - [RVH Mesh Registration](https://github.com/bharat-b7/RVH_Mesh_Registration?tab=readme-ov-file) - Registrierung von 3D-Meshes auf reale Personen
 
 2. **Nutzung und Testen eines SMPL-Renderers:**
    - Die vorhandenen Ansätze zum Rendern von SMPL 3D-Modellen sollen zum Laufen gebracht und mittels Tiefenaufnahmen von RGBD-Kameras getestet werden.
