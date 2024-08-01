@@ -26,3 +26,20 @@ Die Hauptidee besteht darin, zunächst das SMPL-Modell auf die Tiefenaufnahmen z
 
 4. **Evaluierung des SMPL-Modells:**
    - Nach der erfolgreichen Implementierung des SMPL-Modells wird dessen Performance in Bezug auf das Fitting in Kinect-Videos evaluiert. Dabei wird darauf geachtet, wie gut das Modell die Bewegungen der erfassten Person nachbilden kann und wie genau das resultierende Skelett ist.
+
+## Dependencies
+
+- **Boost 1.58:** Boost C++ Bibliothek ist eine Sammlung von hochqualitativen, plattformübergreifenden C++ Bibliotheken, die oft als Erweiterungen der Standardbibliothek dienen. Sie bietet Lösungen für eine Vielzahl von Programmieraufgaben, darunter Datenstrukturen, Algorithmen, Multithreading, und vieles mehr. Boost wird häufig als Grundlage für die Entwicklung von C++ Projekten verwendet und ist bekannt für seine robuste und gut getestete Implementierung.
+
+- OpenCV 3.3+ (OpenCV 4 wird nicht unterstützt)
+- Eigen 3.3.4
+- Ceres Solver 1.14 (Ceres 2 wird nicht unterstützt)
+
+Dies ist sehr leistungsrelevant, und es wird dringend empfohlen, Ceres manuell mit LAPACK- und OpenMP-Unterstützung zu bauen. Wenn Sie einen Intel-Prozessor verwenden, wird ebenfalls empfohlen, MKL als BLAS/LAPACK zu verwenden. Andernfalls wird ATLAS empfohlen. Stellen Sie außerdem sicher, dass Sie Ceres im Release-Modus bauen.
+
+- zlib, für das Lesen des SMPL npz-Modells
+
+Eine der folgenden (optional, aber erforderlich für Live-Demo):
+- K4A (Azure Kinect SDK)
+- libfreenect2
+- PCL 1.8+, optional
