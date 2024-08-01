@@ -1,6 +1,6 @@
 # Automatic Skeleton Marker Relation
 
-## Gruppe: Abraham Neme Alvarez, Luke Mikat, Valdone Zabutkaite
+### Luke Mikat, Abraham Neme Alvarez, Valdone Zabutkaite
 
 ## Problemstellung
 
@@ -29,9 +29,9 @@ Die Hauptidee besteht darin, zunächst das SMPL-Modell auf die Tiefenaufnahmen z
 
 ## Dependencies
 
-- **Boost 1.58:** Boost ist eine Sammlung von hochqualitativen, plattformübergreifenden C++ Bibliotheken, die oft als Erweiterungen der Standardbibliothek dienen. Sie bietet Lösungen für eine Vielzahl von Programmieraufgaben, darunter Datenstrukturen, Algorithmen, Multithreading, und vieles mehr. Boost wird häufig als Grundlage für die Entwicklung von C++ Projekten verwendet und ist bekannt für seine robuste und gut getestete Implementierung.
+- **[Boost 1.58](https://sourceforge.net/projects/boost/files/boost/1.58.0/):** Boost ist eine Sammlung von hochqualitativen, plattformübergreifenden C++ Bibliotheken, die oft als Erweiterungen der Standardbibliothek dienen. Sie bietet Lösungen für eine Vielzahl von Programmieraufgaben, darunter Datenstrukturen, Algorithmen, Multithreading, und vieles mehr. Boost wird häufig als Grundlage für die Entwicklung von C++ Projekten verwendet und ist bekannt für seine robuste und gut getestete Implementierung. Mehr zu [Boost.org](https://www.boost.org)
 
-- **OpenCV 3.3+ (OpenCV 4 wird nicht unterstützt):** Eine umfangreiche Open-Source-Bibliothek, die für Echtzeit-Computer-Vision-Anwendungen entwickelt wurde. Sie bietet eine Vielzahl von Algorithmen und Funktionen zur Bildverarbeitung, Objekt- und Gesichtserkennung, Bewegungsverfolgung und vielem mehr.
+- **[OpenCV 3.3+](https://sourceforge.net/projects/opencvlibrary/files/) (OpenCV 4 wird nicht unterstützt):** Eine umfangreiche Open-Source-Bibliothek, die für Echtzeit-Computer-Vision-Anwendungen entwickelt wurde. Sie bietet eine Vielzahl von Algorithmen und Funktionen zur Bildverarbeitung, Objekt- und Gesichtserkennung, Bewegungsverfolgung und vielem mehr. Weiteres zu [OpenCV](https://opencv.org)
 
 - **Eigen 3.3.4:** Eine vielseitige, plattformübergreifende C++ Bibliothek für lineare Algebra, die sich auf Matrizen- und Vektorenoperationen spezialisiert. Sie bietet leistungsstarke und flexible Tools für numerische Berechnungen, darunter Eigenwertprobleme und lineare Gleichungssysteme.
 
