@@ -3,6 +3,76 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+# Ignore Visual Studio temporary files, build results, and
+# user-specific files
+.vs/
+.vscode/
+*.code-workspace
+
+/3rdparty
+
+# Ignore build directories
+build/
+out/build/
+out/x64-Debug/
+out/x64-Release/
+out/Win32-Debug/
+out/Win32-Release/
+
+# Ignore any compiled binary files
+*.exe
+*.dll
+*.lib
+*.obj
+*.pdb
+
+# Ignore Python bytecode files
+*.pyc
+__pycache__/
+
+# Ignore log files and temporary files
+*.log
+*.tmp
+*.bak
+*.swp
+*~ 
+
+# Ignore compiled libraries
+*.so
+*.dylib
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore Python virtual environment
+env/
+venv/
+
+# Ignore CMake files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Ignore generated files from cmake
+*.o
+*.a
+*.lo
+*.la
+
+# Ignore coverage files
+*.gcda
+*.gcno
+*.gcov
+
+# Ignore package files
+*.tar.gz
+*.zip
+*.7z
+*.rar
+
+
 # User-specific files
 *.rsuser
 *.suo

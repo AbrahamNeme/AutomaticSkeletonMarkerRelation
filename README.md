@@ -29,6 +29,48 @@ Die Hauptidee besteht darin, zunächst das SMPL-Modell auf die Tiefenaufnahmen z
 
 ## Dependencies
 
+Install Dependencies via vcpkg:
+
+```bash
+   git clone https://github.com/microsoft/vcpkg.git
+   cd vcpkg
+   ./bootstrap-vcpkg.sh  # Für Unix-basierte Systeme (macOS/Linux)
+   ./vcpkg integrate install
+
+
+   ./vcpkg install azure-kinect-sensor-sdk
+   ./vcpkg install opencv3
+   ./vcpkg install eigen3
+   ./vcpkg install zlib
+   ./vcpkg install boost
+   ./vcpkg install ceres
+
+   cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=C:\path\to\vcpkg\scripts\buildsystems\vcpkg.cmake
+   cd build
+   cmake --build build --config Release
+
+   cd Release
+
+   ./live-demo.exe --rtree ./tree.150k.refine.srtr
+```
+
+Die Model-Daten und Datasets aus dem [originalen Repo](https://github.com/sxyu/avatar/releases/) waren nicht mehr verfügbar, wodurch man [dieser Anleitung](https://github.com/augcog/OpenARK/tree/master/data/avatar-model) folgen musste um die notwendigen Dateien zu erhalten.
+
+Wichtig für die Live-Demo:
+
+data/avatar-model:
+
+- model.pcd
+- skeleton.txt
+- joint_regressor.txt
+- pose_prior.txt
+
+und
+
+- tree.150k.refine.srtr
+- tree.150k.refine.srtr.partmap
+
+
 - **[Boost 1.58](https://sourceforge.net/projects/boost/files/boost/1.58.0/):** [Boost](https://www.boost.org) ist eine Sammlung von hochqualitativen, plattformübergreifenden C++ Bibliotheken, die oft als Erweiterungen der Standardbibliothek dienen. Sie bietet Lösungen für eine Vielzahl von Programmieraufgaben, darunter Datenstrukturen, Algorithmen, Multithreading, und vieles mehr. Boost wird häufig als Grundlage für die Entwicklung von C++ Projekten verwendet und ist bekannt für seine robuste und gut getestete Implementierung.
 
 - **[OpenCV 3.3+](https://sourceforge.net/projects/opencvlibrary/files/) (OpenCV 4 wird nicht unterstützt):** [OpenCV](https://opencv.org) ist eine umfangreiche Open-Source-Bibliothek, die für Echtzeit-Computer-Vision-Anwendungen entwickelt wurde. Sie bietet eine Vielzahl von Algorithmen und Funktionen zur Bildverarbeitung, Objekt- und Gesichtserkennung, Bewegungsverfolgung und vielem mehr.
