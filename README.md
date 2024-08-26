@@ -40,6 +40,7 @@ Install Dependencies via vcpkg:
 
    ./vcpkg install azure-kinect-sensor-sdk
    ./vcpkg install opencv3
+   ./vcpkg install opencv3[openexr]
    ./vcpkg install eigen3
    ./vcpkg install zlib
    ./vcpkg install boost
