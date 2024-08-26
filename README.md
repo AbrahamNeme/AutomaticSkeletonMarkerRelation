@@ -70,6 +70,10 @@ und
 - tree.150k.refine.srtr
 - tree.150k.refine.srtr.partmap
 
+Für Demo OpenARK Dataset download:
+
+You may acquire a sample from our avatar dataset by running download.sh or manually downloading https://github.com/sxyu/OpenARK-Deps/releases/download/0.0.1/avatar-dataset.zip and extracting into this directory.
+
 
 - **[Boost 1.58](https://sourceforge.net/projects/boost/files/boost/1.58.0/):** [Boost](https://www.boost.org) ist eine Sammlung von hochqualitativen, plattformübergreifenden C++ Bibliotheken, die oft als Erweiterungen der Standardbibliothek dienen. Sie bietet Lösungen für eine Vielzahl von Programmieraufgaben, darunter Datenstrukturen, Algorithmen, Multithreading, und vieles mehr. Boost wird häufig als Grundlage für die Entwicklung von C++ Projekten verwendet und ist bekannt für seine robuste und gut getestete Implementierung.
 
