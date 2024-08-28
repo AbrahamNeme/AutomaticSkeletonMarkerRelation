@@ -2,6 +2,8 @@
 
 ### Luke Mikat, Abraham Neme Alvarez, Valdone Zabutkaite
 
+## Poster
+
 ## Problemstellung
 
 Beim markerbasierten Motion Capturing (MoCap) werden Marker auf den Körper platziert. Es ist jedoch nicht immer möglich, alle Marker genau dort zu platzieren, wo sie idealerweise hingehören. Dadurch fehlt die Relation zwischen den Markern und dem Skelett, was bedeutet, dass man nicht mehr von den Markern auf das Skelett zurückschließen kann.
@@ -27,17 +29,24 @@ Die Hauptidee besteht darin, zunächst das SMPL-Modell auf die Tiefenaufnahmen z
 4. **Evaluierung des SMPL-Modells:**
    - Nach der erfolgreichen Implementierung des SMPL-Modells wird dessen Performance in Bezug auf das Fitting in Kinect-Videos evaluiert. Dabei wird darauf geachtet, wie gut das Modell die Bewegungen der erfassten Person nachbilden kann und wie genau das resultierende Skelett ist.
 
-## Dependencies
+## Avatar Project
 
-Install Dependencies via vcpkg:
+### Dependencies
+
+Install cmake
+
+Install vcpkg:
 
 ```bash
    git clone https://github.com/microsoft/vcpkg.git
    cd vcpkg
-   ./bootstrap-vcpkg.sh  # Für Unix-basierte Systeme (macOS/Linux)
+   ./bootstrap-vcpkg.sh
    ./vcpkg integrate install
+```
 
+Install Dependencies via vcpkg:
 
+```bash
    ./vcpkg install azure-kinect-sensor-sdk
    ./vcpkg install opencv3
    ./vcpkg install opencv3[openexr]
@@ -45,19 +54,13 @@ Install Dependencies via vcpkg:
    ./vcpkg install zlib
    ./vcpkg install boost
    ./vcpkg install ceres
-
-   cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=C:\path\to\vcpkg\scripts\buildsystems\vcpkg.cmake
-   cd build
-   cmake --build build --config Release
-
-   cd Release
-
-   ./live-demo.exe --rtree ./tree.150k.refine.srtr
 ```
+
+### Datensätze 
 
 Die Model-Daten und Datasets aus dem [originalen Repo](https://github.com/sxyu/avatar/releases/) waren nicht mehr verfügbar, wodurch man [dieser Anleitung](https://github.com/augcog/OpenARK/tree/master/data/avatar-model) folgen musste um die notwendigen Dateien zu erhalten.
 
-Wichtig für die Live-Demo:
+Notwendig für das Ausführen der Live-Demo:
 
 data/avatar-model:
 
@@ -65,31 +68,88 @@ data/avatar-model:
 - skeleton.txt
 - joint_regressor.txt
 - pose_prior.txt
-
-und
-
 - tree.150k.refine.srtr
 - tree.150k.refine.srtr.partmap
 
-Für Demo OpenARK Dataset download:
+Notwendig für das Ausführen der Demo (OpenARK Dataset):
 
-You may acquire a sample from our avatar dataset by running download.sh or manually downloading https://github.com/sxyu/OpenARK-Deps/releases/download/0.0.1/avatar-dataset.zip and extracting into this directory.
+Herunterladen und in den Ordner data/avatar-dataset extrahieren:
+
+https://github.com/sxyu/OpenARK-Deps/releases/download/0.0.1/avatar-dataset.zip
+
+### Build
+
+Replace the path to vcpkg:
+
+```bash
+   cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=C:\path\to\vcpkg\scripts\buildsystems\vcpkg.cmake
+   cd build
+   cmake --build build --config Release
+   cd Release
+```
+
+### Live-Demo
+
+TODO 
+
+Die Live-Demo zeigt eine Echtzeitdarstellung von einer Kinect-Kamera und visualiesiert einen 3D-Avatar auf die im Bild stehende Person.
+
+```bash
+./live-demo.exe --rtree ./tree.150k.refine.srtr
+```
+
+### Demo
+
+TODO 
+
+Die Demo zeigt die Verarbeitung und Animation eines 3D-Avatars basierend auf voraufgezeichneten Tiefen-Bildern. Diese Demo dient dazu, die Ergebnisse der Pipeline zu veranschaulichen, ohne dass Echtzeit-Daten erforderlich sind.
+
+```bash
+cd build/Release
+./demo --rtree tree.150k.refine.srtr --dataset_path ../../data/avatar-dataset/human-dance-random --image 351 --background 351
+```
+
+Optional arguments:
+
+TODO (alle optionalen Arguments auflisten/austesten)
+
+-T
+-M
+...
+
+### Evaluierung
+
+TODO
+
+## RVH Mesh Registration
+
+TODO
+
+### Dependencies
+
+### Build
+
+### Datensätze
+
+...
 
 
-- **[Boost 1.58](https://sourceforge.net/projects/boost/files/boost/1.58.0/):** [Boost](https://www.boost.org) ist eine Sammlung von hochqualitativen, plattformübergreifenden C++ Bibliotheken, die oft als Erweiterungen der Standardbibliothek dienen. Sie bietet Lösungen für eine Vielzahl von Programmieraufgaben, darunter Datenstrukturen, Algorithmen, Multithreading, und vieles mehr. Boost wird häufig als Grundlage für die Entwicklung von C++ Projekten verwendet und ist bekannt für seine robuste und gut getestete Implementierung.
+## Ablauf des Projektes
 
-- **[OpenCV 3.3+](https://sourceforge.net/projects/opencvlibrary/files/) (OpenCV 4 wird nicht unterstützt):** [OpenCV](https://opencv.org) ist eine umfangreiche Open-Source-Bibliothek, die für Echtzeit-Computer-Vision-Anwendungen entwickelt wurde. Sie bietet eine Vielzahl von Algorithmen und Funktionen zur Bildverarbeitung, Objekt- und Gesichtserkennung, Bewegungsverfolgung und vielem mehr.
+TODO 
 
-- **[Eigen 3.3.4](https://community.chocolatey.org/packages/eigen/3.3.4):** Eine vielseitige, plattformübergreifende C++ Bibliothek für lineare Algebra, die sich auf Matrizen- und Vektorenoperationen spezialisiert. [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page) bietet leistungsstarke und flexible Tools für numerische Berechnungen, darunter Eigenwertprobleme und lineare Gleichungssysteme. Andere Download-Möglichkeit: [Eigen-Gitlab](https://gitlab.com/libeigen/eigen/-/releases/3.3.4).
+Die Reproduktion des Repositories erwies sich als eine anspruchsvolle Aufgabe, da die verwendeten C++-Bibliotheken veraltet waren und es zu Abhängigkeitskonflikten kam. Zudem fehlten sowohl die Datensätze als auch die Demos, und die im Repository angegebenen Links waren nicht mehr verfügbar. So mussten wir die Datensätze teilweise selbst zusammenzustellen, was zeitaufwändig war. Schließlich konnten wir die Live-Demo und die Demo zum Laufen bringen und evaluieren.
 
-- **[Ceres Solver 1.14](https://github.com/ceres-solver/ceres-solver/tree/1.14.x) (Ceres 2 wird nicht unterstützt):** Eine leistungsstarke C++ Bibliothek zur Lösung von nichtlinearen Optimierungsproblemen. Sie wird oft in Bereichen wie Computer Vision und Robotik eingesetzt, um Probleme wie Kamerakalibrierung und 3D-Rekonstruktion zu lösen. Ceres Solver unterstützt verschiedene Optimierungsalgorithmen und bietet die Möglichkeit, mit großen und komplexen Datensätzen effizient umzugehen, insbesondere wenn sie mit LAPACK und OpenMP kompiliert wird. Weiteres über diese Bibliothek und ihre Installation: [Ceres Solver](http://ceres-solver.org).
+## Aufgabenteilung
 
-- **[zlib](https://www.zlib.net/zlib131.zip):** [Zlib](https://www.zlib.net) ist eine weit verbreitete, plattformübergreifende C-Bibliothek zur Datenkompression. Sie bietet Funktionen zur schnellen und effizienten Komprimierung und Dekomprimierung von Daten, die in vielen Anwendungen und Dateiformaten verwendet werden, einschließlich PNG-Bilddateien und HTTP-Kommunikation. zlib ist bekannt für seine hohe Performance und geringe Speicheranforderungen, was es ideal für ressourcenbeschränkte Umgebungen macht.
+TODO
 
-   Eine der folgenden (erforderlich für Live-Demo):
-- **[K4A](https://github.com/microsoft/Azure-Kinect-Sensor-SDK/blob/develop/docs/usage.md):** [Azure Kinect SDK](https://learn.microsoft.com/de-de/azure/kinect-dk/sensor-sdk-download) ist eine Software-Entwicklungsplattform von Microsoft, die zur Nutzung und Steuerung der Azure Kinect Development Kit Hardware dient. Sie bietet APIs für den Zugriff auf die Tiefenkamera, die RGB-Kamera, den IMU-Sensor und das Mikrofonarray der Azure Kinect. Extra-Dependency: [Depth Engine](https://github.com/microsoft/Azure-Kinect-Sensor-SDK/blob/develop/docs/depthengine.md).
+## Reflexion
 
-- **[libfreenect2](https://github.com/OpenKinect/libfreenect2/blob/master/README.md#installation):** [Libfreenect2](https://openkinect.github.io/libfreenect2/) ist eine Open-Source-Bibliothek zur Ansteuerung und Nutzung der Kinect for Windows v2 (Kinect v2) Sensorhardware. Sie bietet Treiber und APIs, um auf die Tiefen-, Infrarot- und RGB-Kameradaten des Kinect v2 Sensors zuzugreifen. Andere Download-Möglichkeit: [libfreenect2-Conan.io](https://conan.io/center/recipes/libfreenect2).
+TODO
 
-   Optional:
-- **[PCL 1.8+](https://github.com/PointCloudLibrary/pcl/releases):** [Point Cloud Library](https://pointclouds.org/documentation/) ist eine Open-Source-Bibliothek für die Verarbeitung und Analyse von Punktwolken. Sie bietet zahlreiche Algorithmen für Aufgaben wie Filterung, Merkmalsextraktion, Registrierung, Segmentierung und Visualisierung von 3D-Punktwolken. PCL wird häufig in der Robotik, Automatisierung und Computer Vision eingesetzt, um präzise 3D-Modelle und Umgebungswahrnehmung zu ermöglichen.
+Abraham()
+
+Valdone()
+
+Luke(@s82765)
