@@ -40,7 +40,8 @@ Install vcpkg:
 ```bash
    git clone https://github.com/microsoft/vcpkg.git
    cd vcpkg
-   ./bootstrap-vcpkg.sh
+   ./bootstrap-vcpkg.sh   # For Windows
+   ./bootstrap-vcpkg.sh   # For Linux/macOS
    ./vcpkg integrate install
 ```
 
