@@ -33,19 +33,24 @@ Die Hauptidee besteht darin, zunächst das SMPL-Modell auf die Tiefenaufnahmen z
 
 ### Dependencies
 
-Install cmake
+[cmake](https://cmake.org/download/) installieren
 
-Install vcpkg:
+vcpkg installieren:
 
 ```bash
    git clone https://github.com/microsoft/vcpkg.git
    cd vcpkg
-   ./bootstrap-vcpkg.sh   # For Windows
-   ./bootstrap-vcpkg.sh   # For Linux/macOS
+   ./bootstrap-vcpkg.bat     # For Windows
+   ./bootstrap-vcpkg.sh      # For Linux/macOS
    ./vcpkg integrate install
 ```
+Bei Bedarf glfw3 installieren:
 
-Install Dependencies via vcpkg:
+```bash
+   ./vcpkg install glfw3
+```
+
+Dependencies installieren über vcpkg:
 
 ```bash
    ./vcpkg install azure-kinect-sensor-sdk
@@ -152,7 +157,7 @@ TODO
 
 TODO
 
-Abraham()
+Abraham(943567)
 
 Valdone()
 
