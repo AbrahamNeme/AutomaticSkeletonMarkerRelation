@@ -115,13 +115,11 @@ cd build/Release
 ./demo --rtree tree.150k.refine.srtr --dataset_path ../../data/avatar-dataset/human-dance-random --image 351 --background 351
 ```
 
-Optional arguments:
-
-•	**Positionsargumente**:
+•	Positionsargumente:
   - `dataset_path`: Das Wurzelverzeichnis, das den Eingabedatensatz enthält.
   - `rtree`: Der Pfad zum RTree-Modell, das für die Segmentierung verwendet wird.
 
-•	**Optionsargumente**: Diese können über Befehlszeilen-Schalter gesetzt werden.
+•	Optionsargumente: Diese können über Befehlszeilen-Schalter gesetzt werden.
   - `--background` (`-b`): ID des Hintergrundbilds (Standard: 9999).
   - `--image` (`-i`): ID des aktuellen Bilds (Standard: 1).
   - `--pad` (`-p`): Breite der Null-Auffüllung für Bildnamen (Standard: 4).
