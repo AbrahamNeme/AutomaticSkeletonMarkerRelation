@@ -117,11 +117,24 @@ cd build/Release
 
 Optional arguments:
 
-TODO (alle optionalen Arguments auflisten/austesten)
+•	**Positionsargumente**:
+  - `dataset_path`: Das Wurzelverzeichnis, das den Eingabedatensatz enthält.
+  - `rtree`: Der Pfad zum RTree-Modell, das für die Segmentierung verwendet wird.
 
--T
--M
-...
+•	**Optionsargumente**: Diese können über Befehlszeilen-Schalter gesetzt werden.
+  - `--background` (`-b`): ID des Hintergrundbilds (Standard: 9999).
+  - `--image` (`-i`): ID des aktuellen Bilds (Standard: 1).
+  - `--pad` (`-p`): Breite der Null-Auffüllung für Bildnamen (Standard: 4).
+  - `--rtree-only` (`-R`): Flag, um die Optimierung zu überspringen und nur die RTree-Segmentierung anzuzeigen.
+  - `--no-occlusion`: Deaktiviert die Okklusionserkennung im Avatar-Optimierer.
+  - `--betapose`: Gewichtung für den Pose-Prior-Term in der Optimierung (Standard: 0,05).
+  - `--betashape`: Gewichtung für den Shape-Prior-Term in der Optimierung (Standard: 0,12).
+  - `--data-interval`: Intervall für die Pixelberechnung (Standard: 12). Das Verringern dieses Werts erhöht die Genauigkeit der RTree-Segmentierung, steigert jedoch die Rechenlast.
+  - `--nnstep`: Schrittweite für die Nearest-Neighbor-Suche bei der Optimierung (Standard: 20). Eine Verringerung kann die Genauigkeit verbessern, da der Abstand zwischen den Nachbarn reduziert wird, kann jedoch die Verarbeitung verlangsamen.
+  - `--frame-icp-iters` (`-t`): ICP-Iterationen pro Frame (Standard: 3). Höhere Werte verbessern die Genauigkeit, verlangsamen jedoch den Prozess.
+  - `--reinit-icp-iters` (`-T`): ICP-Iterationen bei der Reinitialisierung (Standard: 6). Höhere Werte verbessern die Genauigkeit, verlangsamen jedoch den Prozess.
+  - `--inner-iters`: Maximale innere Iterationen pro ICP-Schritt (Standard: 10).
+  - `--min-points` (`-M`): Minimale Anzahl erkannter Körperpunkte, die für das Tracking erforderlich sind (Standard: 1000). Ein niedrigerer Wert erhöht das Risiko, dass das Tracking fehlschlägt, da zu wenige Punkte erkannt werden.
 
 ### Evaluierung
 
