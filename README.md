@@ -161,8 +161,14 @@ The executable for recording necessary parts of an OpenARK dataset. However, due
 
 #### Live-Demo 
 
-TODO 
-Images from the Live-Demo evaluation
+![Shape Extraction](./images/extracted_human_shape.png)
+Extraction of human shape from depth images
+
+![High Accuracy Frame](./images/frame_0083.png)
+Frame with 82.78% accuracy
+
+![Low Accuracy Frame](./images/frame_0354.png)
+Frame with 28.20% accuracy
 
 ![Avatar Project Evaluation](./images/avatar-project-evaluation.png) -
 
