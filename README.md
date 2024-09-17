@@ -1,74 +1,79 @@
-# Automatic Skeleton Marker Relation
+# Evaluation of Real-Time SMPL Model Representation and Integration
 
 ### Luke Mikat, Abraham Neme Alvarez, Valdone Zabutkaite
 
 ## Poster
 
-## Problemstellung
+TODO
 
-Beim markerbasierten Motion Capturing (MoCap) werden Marker auf den Körper platziert. Es ist jedoch nicht immer möglich, alle Marker genau dort zu platzieren, wo sie idealerweise hingehören. Dadurch fehlt die Relation zwischen den Markern und dem Skelett, was bedeutet, dass man nicht mehr von den Markern auf das Skelett zurückschließen kann.
+## Problem Description
 
-## Lösungsansatz
+In marker-based motion capturing (MoCap), markers are placed on the body. However, it is not always possible to place all markers exactly where they ideally belong. As a result, the relationship between the markers and the skeleton is missing, which means that the skeletal structure can no longer be accurately reconstructed from the markers.
 
-Um die Relation zwischen den MoCap-Markern und dem Skelett zu verbessern, wird vorgeschlagen, auf bestehende Forschungsarbeiten zurückzugreifen, die parametrische Menschenmodelle wie [SMPL (Skinned Multi-Person Linear Model)](https://smpl.is.tue.mpg.de/) verwenden. Diese Modelle können in Tiefenaufnahmen von RGBD-Kameras, beispielsweise der Kinect, eingebettet werden. 
+## Proposed Solution
 
-Die Hauptidee besteht darin, zunächst das SMPL-Modell auf die Tiefenaufnahmen zu fitten und in einem zweiten Schritt die MoCap-Marker zu erkennen und deren Relation zum SMPL-Modell herzustellen. Durch die Verwendung des SMPL-Modells könnte man eine präzisere Positionierung der Marker erreichen, da das Modell detaillierte Informationen über die Körperform und -struktur liefert. Sobald das Modell angepasst ist, könnte die Position der Marker relativ zum Modell berechnet werden. Das würde eine genaue Relation zwischen den Markern und dem Skelett ermöglichen.
+To improve the relationship between MoCap markers and the skeleton, it is proposed to test existing research that utilizes parametric human models such as [SMPL (Skinned Multi-Person Linear Model)](https://smpl.is.tue.mpg.de/). These models can be embedded in depth images captured by RGBD cameras, such as the Azure Kinect.
 
-## Vorgehensweise
+The main idea is to first fit the SMPL model to the depth images and then recognize the MoCap markers to establish their relationship with the SMPL model. By using the SMPL model, more accurate marker positioning could be achieved, because the model provides detailed information about the human body shape and structure.
 
-1. **Untersuchung bestehender Ansätze:**
-   - [Avatar Project](https://github.com/sxyu/avatar) - Anpassung von 3D-Modellen an reale Personen
-   - [RVH Mesh Registration](https://github.com/bharat-b7/RVH_Mesh_Registration?tab=readme-ov-file) - Registrierung von 3D-Meshes auf reale Personen
+To ensure the quality and functionality of the existing approach for fitting the SMPL model onto a human in real time, a comprehensive evaluation will be conducted. The created setup will evaluate on the method's ability to accurately and consistently represent a person as an SMPL model in real-time and fit it to the depth images. This includes evaluating the accuracy of the model fitting, particularly regarding the alignment and coverage between the estimated body parameters and the real recordings. Potential sources of error will also be identified and analyzed to ensure that the approach is robust against different body shapes, movements, camera perspectives and lighting conditions. The results of this evaluation will serve as the basis for making improvements and optimizing the method for use in conjunction with the markers.
 
-2. **Nutzung und Testen eines SMPL-Renderers:**
-   - Die vorhandenen Ansätze zum Rendern von SMPL 3D-Modellen sollen zum Laufen gebracht und mittels Tiefenaufnahmen von RGBD-Kameras getestet werden.
+## Approach
 
-3. **Markererkennung und Zuordnung:**
-   - Im nächsten Schritt wird die Erkennung der MoCap-Marker in den Tiefenaufnahmen vorgenommen. Diese Marker werden dann dem SMPL-Modell zugeordnet, um deren genaue Position relativ zum Skelett zu bestimmen.
+1. **Review of Existing Methods:**
+- Review current solutions based on the SMPL model, such as the [Avatar Project](https://github.com/sxyu/avatar). This repository written in C++ enables the mapping of 3D-SMPL models onto human bodies in real time. It will be evaluated for its suitability for the task.
+   
+2. **Avatar Project Setup:**
+- The Avatar Project will be configured to work in real time with depth images from the Azure Kinect. The goal is to integrate the SMPL model into the captured depth data and create an accurate representation of the person shown in the recordings.
 
-4. **Evaluierung des SMPL-Modells:**
-   - Nach der erfolgreichen Implementierung des SMPL-Modells wird dessen Performance in Bezug auf das Fitting in Kinect-Videos evaluiert. Dabei wird darauf geachtet, wie gut das Modell die Bewegungen der erfassten Person nachbilden kann und wie genau das resultierende Skelett ist.
+3. **Utilizing and Testing the SMPL Demo and Live-Demo:**
+- In the provided repository there are 2 executables, which can be used for creating the SMPL Model. The Demo, which is utilizing a prerecorded dataset for displaying the SMPL Model frame by frame, and the Live-Demo, which is displaying the SMPL Model for the human in the Kinect cameras live stream. Both these will be used to test the functionality of the SMPL model. Suitable datasets must also be created or collected to serve as the basis for the testing of the demo.
+
+
+4. **Evaluation of the SMPL-Model Fitting:**
+- A comprehensive evaluation of the performance of the SMPL model representation will be conducted to assess the quality of fitting to Kinect recordings. Particular attention will be given to the accuracy of the movement of the model and body shape representation. Weaknesses in the fitting process will be documented to identify potential improvements.
+
+5. **(Optional): Marker Detection and Assignment**
+- The markers positions will be mapped to the SMPL model to allow for more precise determination of their location relative to the body structure. This aims to improve the accuracy and functionality of the entire tracking system.
 
 ## Avatar Project
 
 ### Dependencies
 
-[cmake](https://cmake.org/download/) installieren
+The following configuration of the repository requires you to have Windows or Linux as your OS, as the Azure Kinect SDK is not available for macOS. The setup has only been thoroughly tested on Windows.
 
-vcpkg installieren:
+First you'll need to install [cmake](https://cmake.org/download/) to build the project.
 
-```bash
-   git clone https://github.com/microsoft/vcpkg.git
-   cd vcpkg
-   ./bootstrap-vcpkg.bat     # For Windows
-   ./bootstrap-vcpkg.sh      # For Linux/macOS
-   ./vcpkg integrate install
-```
-Bei Bedarf glfw3 installieren:
+We have used vcpkg to manage the projects dependencies. With the following commands you can install it:
 
 ```bash
-   ./vcpkg install glfw3
+git clone https://github.com/microsoft/vcpkg.git
+cd vcpkg
+./bootstrap-vcpkg.bat # For Windows
+./bootstrap-vcpkg.sh  # For Linux
+./vcpkg integrate install
 ```
 
-Dependencies installieren über vcpkg:
+Make sure you're inside your vcpkg directory. Install the projects dependencies via vcpkg:
 
 ```bash
-   ./vcpkg install azure-kinect-sensor-sdk
-   ./vcpkg install opencv3
-   ./vcpkg install opencv3[openexr]
-   ./vcpkg install eigen3
-   ./vcpkg install zlib
-   ./vcpkg install boost
-   ./vcpkg install ceres
+./vcpkg install azure-kinect-sensor-sdk
+./vcpkg install opencv3
+./vcpkg install opencv3[openexr]
+./vcpkg install eigen3
+./vcpkg install zlib
+./vcpkg install boost
+./vcpkg install ceres
+./vcpkg install glfw3
 ```
 
-### Datensätze 
+### Test Data
 
-Die Model-Daten und Datasets aus dem [originalen Repo](https://github.com/sxyu/avatar/releases/) waren nicht mehr verfügbar, wodurch man [dieser Anleitung](https://github.com/augcog/OpenARK/tree/master/data/avatar-model) folgen musste um die notwendigen Dateien zu erhalten.
+The model data and OpenARK datasets from the [original repository](https://github.com/sxyu/avatar/releases/) were no longer available, so [this guide](https://github.com/augcog/OpenARK/tree/master/data/avatar-model) had to be followed to obtain and create the necessary files for testing.
 
-Notwendig für das Ausführen der Live-Demo:
+#### Model
 
-data/avatar-model:
+The `data/avatar-model` directory has to include the following files for running the `live-demo.exe` and `demo.exe`:
 
 - model.pcd
 - skeleton.txt
@@ -77,99 +82,129 @@ data/avatar-model:
 - tree.150k.refine.srtr
 - tree.150k.refine.srtr.partmap
 
-Notwendig für das Ausführen der Demo (OpenARK Dataset):
+#### OpenARK Datasets
 
-Herunterladen und in den Ordner data/avatar-dataset extrahieren:
+The `demo.exe` is utilizing datasets in form of the OpenARK Datasets.
 
-https://github.com/sxyu/OpenARK-Deps/releases/download/0.0.1/avatar-dataset.zip
+Download and extract the [OpenARK-Dataset](https://github.com/sxyu/OpenARK-Deps/releases/download/0.0.1/avatar-dataset.zip) to the directory `data/avatar-dataset`
+
 
 ### Build
 
-Replace the path to vcpkg:
+Make sure you are inside the root directory of you project. Replace the path to vcpkg in the following command:
 
 ```bash
-   cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=C:\path\to\vcpkg\scripts\buildsystems\vcpkg.cmake
-   cd build
-   cmake --build build --config Release
-   cd Release
+cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=C:\path\to\vcpkg\scripts\buildsystems\vcpkg.cmake
 ```
 
-### Live-Demo
+```bash
+cd build
+cmake --build build --config Release
+cd Release
+```
 
-TODO 
+Make sure the files `live-demo.exe` and `demo.exe` have been created.
 
-Die Live-Demo zeigt eine Echtzeitdarstellung von einer Kinect-Kamera und visualiesiert einen 3D-Avatar auf die im Bild stehende Person.
+### Live-Demo 
+
+The live demo displays a real-time representation from a Azure Kinect camera, visualizing a 3D avatar onto the person in the image.
+
+Inside the `Release` directory:
 
 ```bash
 ./live-demo.exe --rtree ./tree.150k.refine.srtr
 ```
 
+#### Options
+
+TODO
+
 ### Demo
 
-TODO 
-
-Die Demo zeigt die Verarbeitung und Animation eines 3D-Avatars basierend auf voraufgezeichneten Tiefen-Bildern. Diese Demo dient dazu, die Ergebnisse der Pipeline zu veranschaulichen, ohne dass Echtzeit-Daten erforderlich sind.
+The demo showcases the processing and animation of the SMPL-Model (`data/avatar-model`) based on a pre-recorded OpenARK Dataset (`data/avatar-dataset`), which includes RGB images, depth images and the joints. This demo is designed to illustrate the results of the pipeline without requiring real-time data from the Azure Kinect.
 
 ```bash
 cd build/Release
 ./demo --rtree tree.150k.refine.srtr --dataset_path ../../data/avatar-dataset/human-dance-random --image 351 --background 351
 ```
 
-•	Positionsargumente:
-  - `dataset_path`: Das Wurzelverzeichnis, das den Eingabedatensatz enthält.
-  - `rtree`: Der Pfad zum RTree-Modell, das für die Segmentierung verwendet wird.
+#### Options
+  - `dataset_path`: Root directory containing the input dataset.
+  - `rtree`: Path to the RTree model used for segmentation.
+  - `--background` (`-b`): Background image ID (default: 9999).
+  - `--image` (`-i`): Current image ID (default: 1).
+  - `--pad` (`-p`): Padding width for image names (default: 4).
+  - `--rtree-only` (`-R`): Flag to skip optimization and only show RTree segmentation.
+  - `--no-occlusion`: Disable occlusion detection in the avatar optimizer.
+  - `--betapose`: Weight for the pose prior term in optimization (default: 0.05).
+  - `--betashape`: Weight for the shape prior term in optimization (default: 0.12).
+  - `--data-interval`: Pixel computation interval. Lower values increase RTree segmentation accuracy but increase computational load. (default: 12). 
+  - `--nnstep`: Step size for nearest-neighbor search during optimization (default: 20). Reducing it improves accuracy but may slow processing.
+  - `--frame-icp-iters` (`-t`): ICP iterations per frame (default: 3). Higher values improve accuracy but slow down the process.
+  - `--reinit-icp-iters` (`-T`): ICP iterations during reinitialization (default: 6). Higher values improve accuracy but slow down the process.
+  - `--inner-iters`:Maximum inner iterations per ICP step (default: 10).
+  - `--min-points` (`-M`): Minimum number of detected body points required for tracking (default: 1000). Lower values increase the risk of tracking failure due to insufficient points.
 
-•	Optionsargumente: Diese können über Befehlszeilen-Schalter gesetzt werden.
-  - `--background` (`-b`): ID des Hintergrundbilds (Standard: 9999).
-  - `--image` (`-i`): ID des aktuellen Bilds (Standard: 1).
-  - `--pad` (`-p`): Breite der Null-Auffüllung für Bildnamen (Standard: 4).
-  - `--rtree-only` (`-R`): Flag, um die Optimierung zu überspringen und nur die RTree-Segmentierung anzuzeigen.
-  - `--no-occlusion`: Deaktiviert die Okklusionserkennung im Avatar-Optimierer.
-  - `--betapose`: Gewichtung für den Pose-Prior-Term in der Optimierung (Standard: 0,05).
-  - `--betashape`: Gewichtung für den Shape-Prior-Term in der Optimierung (Standard: 0,12).
-  - `--data-interval`: Intervall für die Pixelberechnung (Standard: 12). Das Verringern dieses Werts erhöht die Genauigkeit der RTree-Segmentierung, steigert jedoch die Rechenlast.
-  - `--nnstep`: Schrittweite für die Nearest-Neighbor-Suche bei der Optimierung (Standard: 20). Eine Verringerung kann die Genauigkeit verbessern, da der Abstand zwischen den Nachbarn reduziert wird, kann jedoch die Verarbeitung verlangsamen.
-  - `--frame-icp-iters` (`-t`): ICP-Iterationen pro Frame (Standard: 3). Höhere Werte verbessern die Genauigkeit, verlangsamen jedoch den Prozess.
-  - `--reinit-icp-iters` (`-T`): ICP-Iterationen bei der Reinitialisierung (Standard: 6). Höhere Werte verbessern die Genauigkeit, verlangsamen jedoch den Prozess.
-  - `--inner-iters`: Maximale innere Iterationen pro ICP-Schritt (Standard: 10).
-  - `--min-points` (`-M`): Minimale Anzahl erkannter Körperpunkte, die für das Tracking erforderlich sind (Standard: 1000). Ein niedrigerer Wert erhöht das Risiko, dass das Tracking fehlschlägt, da zu wenige Punkte erkannt werden.
+#### Data Recording
 
-### Evaluierung
+The executable for recording necessary parts of an OpenARK dataset. However, due to missing generation of critical files, such as joint data, the datasets created with this tool could not be used for the demo.
+
+### Evaluation
+
+#### Approach
+
+#### Metrics
+
+#### Implementation
+
+### Results
 
 #### Live-Demo 
-   ![Avatar Project Evaluation](./images/avatar-project-evaluation.png) -
-#### Demo
- TODO
-
-## RVH Mesh Registration
-
-TODO
-
-### Dependencies
-
-### Build
-
-### Datensätze
-
-...
-
-
-## Ablauf des Projektes
 
 TODO 
+Images from the Live-Demo evaluation
 
-Die Reproduktion des Repositories erwies sich als eine anspruchsvolle Aufgabe, da die verwendeten C++-Bibliotheken veraltet waren und es zu Abhängigkeitskonflikten kam. Zudem fehlten sowohl die Datensätze als auch die Demos, und die im Repository angegebenen Links waren nicht mehr verfügbar. So mussten wir die Datensätze teilweise selbst zusammenzustellen, was zeitaufwändig war. Schließlich konnten wir die Live-Demo und die Demo zum Laufen bringen und evaluieren.
+![Avatar Project Evaluation](./images/avatar-project-evaluation.png) -
 
-## Aufgabenteilung
+#### Demo
+
+TODO 
+Images from the DEMO
+
+### Project Retrospective
+
+Reproducing the repository proved to be a challenging task due to outdated C++ libraries and dependency conflicts. Additionally, both the datasets and models were missing, and the links provided in the repository were no longer available. As a result, we had to assemble the datasets ourselves, which was time-consuming and prone to errors, due to the lack of documentation. We managed to get both the live demo and the demo to work and could evaluate them. Due to the sheer lack of documentation and necessary files from the model and OpenARK datasets we had to put more time into understanding the repositories workflows instead of concentrating on the evaluation itself. 
+
+### Future Research
+
+The optional marker detection and assignment task would be the next step to investigate in our future work. We deem this approach to be promising, however the repository seems to be outdated and should be revised or adapted for our requirements. Additionally there are very promising new apporaches in the creation of SMPL-Model representataions of human bodies from normal RGB cameras without the need of depth images from a Kinect, which is way more intuitive. For example [Meshcapade](https://meshcapade.com/SMPL). 
+
+## Task Division
 
 TODO
 
-## Reflexion
+### Abraham (@)
+
+### Valdone (@)
+
+### Luke (@s82765)
+- Setup and integration of the project
+- Resolved dependency conflicts
+- Assembled OpenARK datasets
+- Built the project
+- Tested demo, live demo, and data recording executables
+- Modified live-demo code to export multiple outputs for the evaluation dataset
+- Recorded evaluation datasets
+- Created illustrations for the poster
+- Wrote documentation
+
+
+## Personal Reflexion
 
 TODO
 
-Abraham(943567)
+### Abraham (@)
 
-Valdone()
+### Valdone (@)
 
-Luke(@s82765)
+### Luke (@s82765)
