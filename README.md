@@ -183,11 +183,11 @@ The optional marker detection and assignment task would be the next step to inve
 
 TODO
 
-### Abraham (@)
+### Abraham
 
-### Valdone (@)
+### Valdone
 
-### Luke (@s82765)
+### Luke
 - Setup and integration of the project
 - Resolved dependency conflicts
 - Assembled OpenARK datasets
@@ -199,12 +199,12 @@ TODO
 - Wrote documentation
 
 
-## Personal Reflexion
+## Personal Reflection
 
 TODO
 
-### Abraham (@)
+### Abraham
 
-### Valdone (@)
+### Valdone
 
-### Luke (@s82765)
+### Luke
