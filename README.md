@@ -174,13 +174,12 @@ The executable for recording necessary parts of an OpenARK dataset. However, due
 
 #### Implementation
 
-- **Comparing body shapes:** The script begins by loading two images (depth-image and SMLP-image). The images are initially preprocessed to facilitate the conversion to binary. This preprocessing includes creating and applying some color masks to the depth image to isolate the body shape and a grayscale conversion for both images, which reduces the number of color channels to one, facilitating the identification of black and non-black pixels. Once converted to grayscale, each image is analyzed pixel by pixel. The grayscale pixel values are compared to a threshold to determine whether they are black (value close to 0) or non-black (value other than 0). Based on this, a binary array is generated: If the pixel is black, a value of 0 is assigned. If the pixel is non-black, a value of 1 is assigned.
-
+1. **Comparing body shapes:** The script begins by loading two images (depth-image and SMLP-image). The images are initially preprocessed to facilitate the conversion to binary. This preprocessing includes creating and applying some color masks to the depth image to isolate the body shape and a grayscale conversion for both images, which reduces the number of color channels to one, facilitating the identification of black and non-black pixels. Once converted to grayscale, each image is analyzed pixel by pixel. The grayscale pixel values are compared to a threshold to determine whether they are black (value close to 0) or non-black (value other than 0). Based on this, a binary array is generated: If the pixel is black, a value of 0 is assigned. If the pixel is non-black, a value of 1 is assigned.
 This process generates two binary arrays, one for each image, where each value indicates whether the corresponding position in the image contains relevant information (human form) or black background. The comparison of the images is performed at the level of the binary arrays, only positions where at least one of the images has a value of 1, i.e. where there are non-black pixels, are considered. Within the relevant indices, cases where both images have a value of 1 are counted, indicating that both represent a shape at that position. Positions where both images have a 0 (black background) are discarded from the calculation, as they do not provide information about the shape. The similarity between the two images is calculated as the percentage of coincidences in the relevant pixels
 
 #### Results
 
-- **Comparing body shapes:** 
+1. **Comparing body shapes:** Through this test it was possible to demonstrate that the avatar project can achieve 75% or better accuracy in detecting and reproducing most simple postures, such as standing, stretching the arms out to the sides and upward, and walking in a straight line. However, it has difficulty detecting more complicated poses such as jumping, crouching or lying down, averaging between 50-60% accuracy. It shows even lower results of around 30% when it comes to poses that do not allow the program to observe and detect part of the person's body in front of the camera. In the end a total of 280 frames from the Live-Demo with a variety of poses were analysed and the average accuracy obtained was of 65.35%
 
 #### Live-Demo 
 
@@ -196,7 +195,8 @@ This process generates two binary arrays, one for each image, where each value i
      
 ![Low Accuracy Frame](./images/frame_0354.png)
 
-   - All images provide by the Live-Demo
+   - All images provided by the Live-Demo
+     
 ![Avatar Project Evaluation](./images/avatar-project-evaluation.png) -
 
 #### Demo
