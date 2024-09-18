@@ -153,28 +153,27 @@ The executable for recording necessary parts of an OpenARK dataset. However, due
 
 #### Approach
 
-1. **Comparing body shapes:** The purpose of this python script is to evaluate the similarity between two images containing human forms, specifically by comparing the non-black regions of the images. The images were obtained by dividing a video of the Live-Demo into frames and they show different models of a human body obtained from the same frame one being a depth-image and the other one the generated SMLP-model. The objective is to determine the accuracy of Avatar project by determining how similar they are in terms of the body shape they contain, discarding the black areas in the background.
+1. **Comparing body shapes:** The purpose of this python script is to evaluate the similarity between two images containing human forms, specifically by comparing the non-black regions of the images. The images were obtained by dividing a video of the Live-Demo into frames and they show different models of a human body obtained from the same frame one being a depth-image and the other one the generated SMPL-model. The objective is to determine the accuracy of Avatar project by determining how similar they are in terms of the body shape they contain, discarding the black areas in the background.
 
 #### Metrics
 
 1. **Comparing body shapes:** The main metrics of the test are as follows.
 
-   - Similarity Percentage: Indicates the proportion of non-black pixels (value 1) that match between the two images, measuring the similarity between the shapes       present, excluding the black background.
+   - Similarity Percentage: Indicates the proportion of non-black pixels (value 1) that match between the two images, measuring the similarity between the shapes present, excluding the black background.
 
    - Total Relevant Pixels: Counts pixels where at least one of the images has a value of 1, evaluating only significant areas containing shapes.
 
    - Number of Coincidences: Represents the number of pixels where both images have a value of 1, key to calculate the percentage of similarity.
 
-   - Number of Non-Matching Pixels: Reflects the pixels where one image has a value of 1 and the other does not, pointing out the differences between the two           shapes.
+   - Number of Non-Matching Pixels: Reflects the pixels where one image has a value of 1 and the other does not, pointing out the differences between the two shapes.
 
    The percentage of accuracy is then determined by this formula:
-  \[
-  \text{Similarity} = \left( \frac{\text{Number of matching pixels (1's in both images)}}{\text{Total number of relevant pixels (where at least one image has        1)}} \right) \times 100
-  \]
+   
+   Accuracy = Number of matching pixels (1's in both images) / Total number of relevant pixels (where at least one image has 1) * 100
 
 #### Implementation
 
-1. **Comparing body shapes:** The script begins by loading two images (depth-image and SMLP-image). The images are initially preprocessed to facilitate the conversion to binary. This preprocessing includes creating and applying some color masks to the depth image to isolate the body shape and a grayscale conversion for both images, which reduces the number of color channels to one, facilitating the identification of black and non-black pixels. Once converted to grayscale, each image is analyzed pixel by pixel. The grayscale pixel values are compared to a threshold to determine whether they are black (value close to 0) or non-black (value other than 0). Based on this, a binary array is generated: If the pixel is black, a value of 0 is assigned. If the pixel is non-black, a value of 1 is assigned.
+1. **Comparing body shapes:** The script begins by loading two images (depth-image and SMPL-image). The images are initially preprocessed to facilitate the conversion to binary. This preprocessing includes creating and applying some color masks to the depth image to isolate the body shape and a grayscale conversion for both images, which reduces the number of color channels to one, facilitating the identification of black and non-black pixels. Once converted to grayscale, each image is analyzed pixel by pixel. The grayscale pixel values are compared to a threshold to determine whether they are black (value close to 0) or non-black (value other than 0). Based on this, a binary array is generated: If the pixel is black, a value of 0 is assigned. If the pixel is non-black, a value of 1 is assigned.
 This process generates two binary arrays, one for each image, where each value indicates whether the corresponding position in the image contains relevant information (human form) or black background. The comparison of the images is performed at the level of the binary arrays, only positions where at least one of the images has a value of 1, i.e. where there are non-black pixels, are considered. Within the relevant indices, cases where both images have a value of 1 are counted, indicating that both represent a shape at that position. Positions where both images have a 0 (black background) are discarded from the calculation, as they do not provide information about the shape. The similarity between the two images is calculated as the percentage of coincidences in the relevant pixels
 
 #### Results
@@ -201,8 +200,11 @@ This process generates two binary arrays, one for each image, where each value i
 
 #### Demo
 
-TODO 
-Images from the DEMO
+The Demo program was able to work with the OpenARK dataset, however after intensive testing and adjustment of the multiple parameters we were not able to positive and relevant results. Even with simple poses, that are handled effortlesly by the Live-Demo, the Demo program struggled to identify the human in the image and match the SMPL-model with it. Results from the Demo are shown below.
+
+![Demo1](./images/screenshot_demo1.png)
+
+![Demo2](./images/screenshot_demo2.png)
 
 ### Project Retrospective
 
@@ -217,6 +219,11 @@ The optional marker detection and assignment task would be the next step to inve
 TODO
 
 ### Abraham
+- Wrote the script compare_body_shapes_test.py
+- Processed evaluation dataset to calculate accuracy of the Avatar project
+- Tested and identified parameters of the demo
+- Created images displaying similarity between SMPL-models and depth-images
+- Wrote documentation
 
 ### Valdone
 
