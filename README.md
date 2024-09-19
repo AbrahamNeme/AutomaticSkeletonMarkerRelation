@@ -54,7 +54,7 @@ cd vcpkg
 ./vcpkg integrate install
 ```
 
-Make sure you're inside your vcpkg directory. Install the projects dependencies via vcpkg:
+Make sure you are inside your vcpkg directory. Install the projects dependencies via vcpkg:
 
 ```bash
 ./vcpkg install azure-kinect-sensor-sdk
@@ -107,9 +107,9 @@ Make sure the files `live-demo.exe` and `demo.exe` have been created.
 
 ### Live-Demo 
 
-The live demo displays a real-time representation from a Azure Kinect camera, visualizing a 3D avatar onto the person in the image.
+The live demo displays a real-time representation from a Azure Kinect camera, visualizing a SMPL model onto the person in the image.
 
-Inside the `Release` directory:
+Execute this command inside the `Release` directory to start the live demo:
 
 ```bash
 ./live-demo.exe --rtree ./tree.150k.refine.srtr
@@ -121,7 +121,7 @@ TODO
 
 ### Demo
 
-The demo showcases the processing and animation of the SMPL-Model (`data/avatar-model`) based on a pre-recorded OpenARK Dataset (`data/avatar-dataset`), which includes RGB images, depth images and the joints. This demo is designed to illustrate the results of the pipeline without requiring real-time data from the Azure Kinect.
+The demo showcases the processing and animation of the SMPL model (`data/avatar-model`) based on a pre-recorded OpenARK dataset (`data/avatar-dataset`), which includes RGB images, depth images and the joints. This demo is designed to illustrate the results of the pipeline without requiring real time data from the Azure Kinect.
 
 ```bash
 cd build/Release
