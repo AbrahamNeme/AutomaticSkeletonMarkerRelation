@@ -16,7 +16,7 @@ To improve the relationship between MoCap markers and the skeleton, it is propos
 
 The main idea is to first fit the SMPL model to the depth images and then recognize the MoCap markers to establish their relationship with the SMPL model. By using the SMPL model, more accurate marker positioning could be achieved, because the model provides detailed information about the human body shape and structure.
 
-To ensure the quality and functionality of the existing approach for fitting the SMPL model onto a human in real time, a comprehensive evaluation will be conducted. The created setup will evaluate on the method's ability to accurately and consistently represent a person as an SMPL model in real-time and fit it to the depth images. This includes evaluating the accuracy of the model fitting, particularly regarding the alignment and coverage between the estimated body parameters and the real recordings. Potential sources of error will also be identified and analyzed to ensure that the approach is robust against different body shapes, movements, camera perspectives and lighting conditions. The results of this evaluation will serve as the basis for making improvements and optimizing the method for use in conjunction with the markers.
+To ensure the quality and functionality of the existing approach for fitting the SMPL model onto a human in real time, a comprehensive evaluation will be conducted. The created setup will evaluate on the method's ability to accurately and consistently represent a person as an SMPL model in real-time and fit it to the depth images. This includes evaluating the accuracy of the model fitting, particularly regarding the alignment and coverage between the estimated body parameters and the real recordings. Potential sources of error will also be identified and analyzed to ensure that the approach is robust against different body shapes, movements, camera perspectives and lighting conditions. The results of this evaluation will serve as the basis for making improvements and optimizing the method for use with the markers.
 
 ## Approach
 
@@ -27,11 +27,10 @@ To ensure the quality and functionality of the existing approach for fitting the
 - The Avatar Project will be configured to work in real time with depth images from the Azure Kinect. The goal is to integrate the SMPL model into the captured depth data and create an accurate representation of the person shown in the recordings.
 
 3. **Utilizing and Testing the SMPL Demo and Live-Demo:**
-- In the provided repository there are 2 executables, which can be used for creating the SMPL Model. The Demo, which is utilizing a prerecorded dataset for displaying the SMPL Model frame by frame, and the Live-Demo, which is displaying the SMPL Model for the human in the Kinect cameras live stream. Both these will be used to test the functionality of the SMPL model. Suitable datasets must also be created or collected to serve as the basis for the testing of the demo.
-
+- In the provided repository there are 2 executables, which can be used for creating the real time human representation as the SMPL model. The demo, which is utilizing a prerecorded dataset for displaying the SMPL model frame by frame, and the live demo, which is displaying the SMPL model in the Kinect cameras live stream. Both these will be used to test the functionality of the SMPL model. Suitable datasets must also be created or collected to serve as the basis for the evaluation.
 
 4. **Evaluation of the SMPL-Model Fitting:**
-- A comprehensive evaluation of the performance of the SMPL model representation will be conducted to assess the quality of fitting to Kinect recordings. Particular attention will be given to the accuracy of the movement of the model and body shape representation. Weaknesses in the fitting process will be documented to identify potential improvements.
+- A comprehensive evaluation of the performance of the SMPL model representation will be conducted to assess the quality of fitting the model to depth recordings of a human. Particular attention will be given to the accuracy of the pose estimation and body shape representation of the model. Weaknesses in the fitting process will be documented to identify potential improvements.
 
 5. **(Optional): Marker Detection and Assignment**
 - The markers positions will be mapped to the SMPL model to allow for more precise determination of their location relative to the body structure. This aims to improve the accuracy and functionality of the entire tracking system.
@@ -42,7 +41,7 @@ To ensure the quality and functionality of the existing approach for fitting the
 
 The following configuration of the repository requires you to have Windows or Linux as your OS, as the Azure Kinect SDK is not available for macOS. The setup has only been thoroughly tested on Windows.
 
-First you'll need to install [cmake](https://cmake.org/download/) to build the project.
+First you will need to install [cmake](https://cmake.org/download/) to build the project.
 
 We have used vcpkg to manage the projects dependencies. With the following commands you can install it:
 
@@ -84,14 +83,14 @@ The `data/avatar-model` directory has to include the following files for running
 
 #### OpenARK Datasets
 
-The `demo.exe` is utilizing datasets in form of the OpenARK Datasets.
+The `demo.exe` is utilizing datasets in form of the OpenARK datasets.
 
-Download and extract the [OpenARK-Dataset](https://github.com/sxyu/OpenARK-Deps/releases/download/0.0.1/avatar-dataset.zip) to the directory `data/avatar-dataset`
+Download and extract the [OpenARK-Dataset](https://github.com/sxyu/OpenARK-Deps/releases/download/0.0.1/avatar-dataset.zip) to the directory `data/avatar-dataset`.
 
 
 ### Build
 
-Make sure you are inside the root directory of you project. Replace the path to vcpkg in the following command:
+Make sure you are inside the root directory of your project. Replace the path to vcpkg in the following command:
 
 ```bash
 cmake -B build -S . -DCMAKE_TOOLCHAIN_FILE=C:\path\to\vcpkg\scripts\buildsystems\vcpkg.cmake
@@ -107,7 +106,7 @@ Make sure the files `live-demo.exe` and `demo.exe` have been created.
 
 ### Live-Demo 
 
-The live demo displays a real-time representation from a Azure Kinect camera, visualizing a SMPL model onto the person in the image.
+The live demo displays a real-time representation from an Azure Kinect camera, visualizing a SMPL model onto the person in the image.
 
 Execute this command inside the `Release` directory to start the live demo:
 
@@ -119,9 +118,13 @@ Execute this command inside the `Release` directory to start the live demo:
 
 TODO
 
+#### Controls
+
+TODO
+
 ### Demo
 
-The demo showcases the processing and animation of the SMPL model (`data/avatar-model`) based on a pre-recorded OpenARK dataset (`data/avatar-dataset`), which includes RGB images, depth images and the joints. This demo is designed to illustrate the results of the pipeline without requiring real time data from the Azure Kinect.
+The demo showcases the processing and animation of the SMPL model (`data/avatar-model`) based on a pre-recorded OpenARK dataset (`data/avatar-dataset`), which includes RGB images, depth images and the joints. This demo is designed to illustrate the results of the application without requiring real-time data from the Azure Kinect.
 
 ```bash
 cd build/Release
@@ -129,8 +132,8 @@ cd build/Release
 ```
 
 #### Options
-  - `dataset_path`: Root directory containing the input dataset.
-  - `rtree`: Path to the RTree model used for segmentation.
+  - `--dataset_path`: Root directory containing the input dataset.
+  - `--rtree`: Path to the RTree model used for segmentation.
   - `--background` (`-b`): Background image ID (default: 9999).
   - `--image` (`-i`): Current image ID (default: 1).
   - `--pad` (`-p`): Padding width for image names (default: 4).
@@ -142,18 +145,22 @@ cd build/Release
   - `--nnstep`: Step size for nearest-neighbor search during optimization (default: 20). Reducing it improves accuracy but may slow processing.
   - `--frame-icp-iters` (`-t`): ICP iterations per frame (default: 3). Higher values improve accuracy but slow down the process.
   - `--reinit-icp-iters` (`-T`): ICP iterations during reinitialization (default: 6). Higher values improve accuracy but slow down the process.
-  - `--inner-iters`:Maximum inner iterations per ICP step (default: 10).
+  - `--inner-iters`: Maximum inner iterations per ICP step (default: 10).
   - `--min-points` (`-M`): Minimum number of detected body points required for tracking (default: 1000). Lower values increase the risk of tracking failure due to insufficient points.
 
 #### Data Recording
 
-The executable for recording necessary parts of an OpenARK dataset. However, due to missing generation of critical files, such as joint data, the datasets created with this tool could not be used for the demo.
+This executable can be used for recording necessary parts of an OpenARK dataset. However, due to missing generation of critical files, such as joint data, the datasets created with this tool could not be used for the demo.
 
 ### Evaluation
 
 #### Approach
 
 1. **Comparing body shapes:** The purpose of this python script is to evaluate the similarity between two images containing human forms, specifically by comparing the non-black regions of the images. The images were obtained by dividing a video of the Live-Demo into frames and they show different models of a human body obtained from the same frame one being a depth-image and the other one the generated SMPL-model. The objective is to determine the accuracy of Avatar project by determining how similar they are in terms of the body shape they contain, discarding the black areas in the background.
+
+2. **Comparing human poses:**
+
+TODO
 
 #### Metrics
 
@@ -171,16 +178,22 @@ The executable for recording necessary parts of an OpenARK dataset. However, due
    
    Accuracy = Number of matching pixels (1's in both images) / Total number of relevant pixels (where at least one image has 1) * 100
 
+2. **Comparing human poses:**
+
+TODO
+
 #### Implementation
 
 1. **Comparing body shapes:** The script begins by loading two images (depth-image and SMPL-image). The images are initially preprocessed to facilitate the conversion to binary. This preprocessing includes creating and applying some color masks to the depth image to isolate the body shape and a grayscale conversion for both images, which reduces the number of color channels to one, facilitating the identification of black and non-black pixels. Once converted to grayscale, each image is analyzed pixel by pixel. The grayscale pixel values are compared to a threshold to determine whether they are black (value close to 0) or non-black (value other than 0). Based on this, a binary array is generated: If the pixel is black, a value of 0 is assigned. If the pixel is non-black, a value of 1 is assigned.
-This process generates two binary arrays, one for each image, where each value indicates whether the corresponding position in the image contains relevant information (human form) or black background. The comparison of the images is performed at the level of the binary arrays, only positions where at least one of the images has a value of 1, i.e. where there are non-black pixels, are considered. Within the relevant indices, cases where both images have a value of 1 are counted, indicating that both represent a shape at that position. Positions where both images have a 0 (black background) are discarded from the calculation, as they do not provide information about the shape. The similarity between the two images is calculated as the percentage of coincidences in the relevant pixels
+This process generates two binary arrays, one for each image, where each value indicates whether the corresponding position in the image contains relevant information (human form) or black background. The comparison of the images is performed at the level of the binary arrays, only positions where at least one of the images has a value of 1, i.e. where there are non-black pixels, are considered. Within the relevant indices, cases where both images have a value of 1 are counted, indicating that both represent a shape at that position. Positions where both images have a 0 (black background) are discarded from the calculation, as they do not provide information about the shape. The similarity between the two images is calculated as the percentage of coincidences in the relevant pixels.
+
+2. **Comparing human poses:**
+
+TODO
 
 #### Results
 
 1. **Comparing body shapes:** Through this test it was possible to demonstrate that the avatar project can achieve 75% or better accuracy in detecting and reproducing most simple postures, such as standing, stretching the arms out to the sides and upward, and walking in a straight line. However, it has difficulty detecting more complicated poses such as jumping, crouching or lying down, averaging between 50-60% accuracy. It shows even lower results of around 30% when it comes to poses that do not allow the program to observe and detect part of the person's body in front of the camera. In the end a total of 280 frames from the Live-Demo with a variety of poses were analysed and the average accuracy obtained was of 65.35%
-
-#### Live-Demo 
 
    - Extraction of human shape from depth images
      
@@ -194,9 +207,18 @@ This process generates two binary arrays, one for each image, where each value i
      
 ![Low Accuracy Frame](./images/frame_0354.png)
 
+2. **Comparing human poses:**
+
+TODO
+
+
+#### Live-Demo
+
+TODO
+
    - All images provided by the Live-Demo
      
-![Avatar Project Evaluation](./images/avatar-project-evaluation.png) -
+![Avatar Project Evaluation](./images/avatar-project-evaluation.png) 
 
 #### Demo
 
@@ -237,14 +259,3 @@ TODO
 - Recorded evaluation datasets
 - Created illustrations for the poster
 - Wrote documentation
-
-
-## Personal Reflection
-
-TODO
-
-### Abraham
-
-### Valdone
-
-### Luke
