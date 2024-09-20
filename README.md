@@ -114,6 +114,19 @@ Execute this command inside the `Release` directory to start the live demo:
 ./live-demo.exe --rtree ./tree.150k.refine.srtr
 ```
 
+#### Controls
+
+- `Q` or `ESC`: Quit the demo.
+- `b`: Set background
+- `0-3`: Toggle between background options:
+  - `0`: Empty background.
+  - `1`: RGB background.
+  - `2`: Depth background.
+  - `3`: Custom background.
+- `h`: Show or hide the human bounding box.
+- `t`: Toggle between Random Tree visualization and SMPL model visualization.
+- `SPACE`: Start or pause the demo.
+
 #### Options
 
 - `--rtree arg`: Path to the RTree model. (Required)
@@ -137,19 +150,6 @@ Execute this command inside the `Release` directory to start the live demo:
 - `--width arg (default: 1280)`: Width of the generated images.
 - `--height arg (default: 720)`: Height of the generated images.
 - `--k4a`: Force Kinect Azure (K4A) depth camera usage.
-
-#### Controls
-
-- `Q` or `ESC`: Quit the demo.
-- `b`: Set background
-- `0-3`: Toggle between background options:
-  - `0`: Empty background.
-  - `1`: RGB background.
-  - `2`: Depth background.
-  - `3`: Custom background.
-- `h`: Show or hide the human bounding box.
-- `t`: Toggle between Random Tree visualization and SMPL model visualization.
-- `SPACE`: Start or pause the demo.
 
 ### Demo
 
