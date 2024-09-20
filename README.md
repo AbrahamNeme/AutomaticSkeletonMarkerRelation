@@ -222,7 +222,7 @@ TODO
 
 #### Results
 
-1. **Comparing body shapes:** Through this test it was possible to demonstrate that the avatar project can achieve 75% or better accuracy in detecting and reproducing most simple postures, such as standing, stretching the arms out to the sides and upward, and walking in a straight line. However, it has difficulty detecting more complicated poses such as jumping, crouching or lying down, averaging between 50-60% accuracy. It shows even lower results of around 30% when it comes to poses that do not allow the program to observe and detect part of the person's body in front of the camera. In the end a total of 280 frames from the Live-Demo with a variety of poses were analysed and the average accuracy obtained was of 65.35%
+1. **Comparing body shapes:** Through this test it was possible to demonstrate that the avatar project can achieve 80% or better accuracy in detecting and reproducing most simple postures, such as standing, stretching the arms out to the sides and upward, and walking in a straight line. However, it has difficulty detecting more complicated poses such as jumping, crouching or lying down, averaging between 50-60% accuracy. It shows even lower results of around 30% when it comes to poses that do not allow the program to observe and detect part of the person's body standing before the camera. In the end a total of 280 frames from the Live-Demo with a variety of poses were analysed and the average accuracy obtained was of 65.35%.
 
    - Extraction of human shape from depth images
      
@@ -232,7 +232,7 @@ TODO
      
 ![High Accuracy Frame](./images/frame_0083.png)
 
-   - Frame with 28.20% accuracy
+   - Frame with 38.20% accuracy
      
 ![Low Accuracy Frame](./images/frame_0354.png)
 
@@ -251,7 +251,7 @@ TODO
 
 #### Demo
 
-The Demo program was able to work with the OpenARK dataset, however after intensive testing and adjustment of the multiple parameters we were not able to positive and relevant results. Even with simple poses, that are handled effortlesly by the Live-Demo, the Demo program struggled to identify the human in the image and match the SMPL-model with it. Results from the Demo are shown below.
+The Demo program was able to work with the OpenARK dataset, however after intensive testing and adjustment of the multiple parameters we were not able to get positive and relevant results. Even with simple poses, that are handled effortlesly by the Live-Demo, the Demo program struggled to identify the human in the image and match the SMPL-model with it. Results from the Demo are shown below.
 
 ![Demo1](./images/screenshot_demo1.png)
 
