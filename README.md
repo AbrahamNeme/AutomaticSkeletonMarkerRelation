@@ -116,11 +116,40 @@ Execute this command inside the `Release` directory to start the live demo:
 
 #### Options
 
-TODO
+- `--rtree arg`: Path to the RTree model. (Required)
+- `-R [ --rtree-only ]`: Show only the RTree part segmentation and skip optimization.
+- `--no-occlusion`: Disable occlusion detection in avatar optimizer prior to neural network (NN) matching.
+- `--betapose arg (default: 0.05)`: Pose prior term weight for optimization loss function.
+- `--betashape arg (default: 0.12)`: Shape prior term weight for optimization loss function.
+- `--nnstep arg (default: 20)`: Number of nearest-neighbor points to match per step (speed heuristic, currently not used).
+- `-t [ --frame-icp-iters ] arg (default: 3)`: ICP iterations per frame.
+- `-T [ --reinit-icp-iters ] arg (default: 5)`: ICP iterations when reinitializing after tracking loss.
+- `-e [ --initial-icp-iters ] arg (default: 7)`: ICP iterations during initial reinitialization.
+- `-I [ --data-interval ] arg (default: 12)`: Interval for computing RTree weights and optimizing pixels.
+- `-p [ --inner-iters ] arg (default: 10)`: Maximum inner iterations per ICP step.
+- `-i [ --intrin-path ] arg`: Path to the camera intrinsics file (default: hardcoded K4A intrinsics).
+- `-b [ --bg-path ] arg`: Path to the background image.
+- `--initial-per-part-thresh arg (default: 80)`: Minimum detected points per body part to start tracking.
+- `-M [ --min-points ] arg (default: 1000)`: Minimum detected body points required to continue tracking. If it falls below this number, the tracker reinitializes.
+- `-N [ --nn-dist ] arg (default: 0.002)`: Minimum distance (scales with image size) between background pixel and current pixel.
+- `-n [ --neighb-dist ] arg (default: 0.001)`: Minimum distance (scales with image size) between neighboring pixels for background subtraction.
+- `--dist-to-pre-weight arg (default: 0.001)`: Weight of squared distance to the previous center of mass for selecting the best-connected component in RTree postprocessing.
+- `--width arg (default: 1280)`: Width of the generated images.
+- `--height arg (default: 720)`: Height of the generated images.
+- `--k4a`: Force Kinect Azure (K4A) depth camera usage.
 
 #### Controls
 
-TODO
+- `Q` or `ESC`: Quit the demo.
+- `b`: Set background
+- `0-3`: Toggle between background options:
+  - `0`: Empty background.
+  - `1`: RGB background.
+  - `2`: Depth background.
+  - `3`: Custom background.
+- `h`: Show or hide the human bounding box.
+- `t`: Toggle between Random Tree visualization and SMPL model visualization.
+- `SPACE`: Start or pause the demo.
 
 ### Demo
 
@@ -132,10 +161,10 @@ cd build/Release
 ```
 
 #### Options
-  - `--dataset_path`: Root directory containing the input dataset.
-  - `--rtree`: Path to the RTree model used for segmentation.
-  - `--background` (`-b`): Background image ID (default: 9999).
-  - `--image` (`-i`): Current image ID (default: 1).
+  - `--dataset_path`: Root directory containing the input dataset. (Required)
+  - `--rtree`: Path to the RTree model used for segmentation. (Required)
+  - `--background` (`-b`): Background image ID (default: 9999). (Required)
+  - `--image` (`-i`): Current image ID (default: 1). (Required)
   - `--pad` (`-p`): Padding width for image names (default: 4).
   - `--rtree-only` (`-R`): Flag to skip optimization and only show RTree segmentation.
   - `--no-occlusion`: Disable occlusion detection in the avatar optimizer.
