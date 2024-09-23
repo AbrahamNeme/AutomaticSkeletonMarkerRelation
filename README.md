@@ -187,9 +187,7 @@ This executable can be used for recording necessary parts of an OpenARK dataset.
 
 1. **Comparing body shapes:** The purpose of this python script is to evaluate the similarity between two images containing human forms, specifically by comparing the non-black regions of the images. The images were obtained by dividing a video of the Live-Demo into frames and they show different models of a human body obtained from the same frame one being a depth-image and the other one the generated SMPL-model. The objective is to determine the accuracy of Avatar project by determining how similar they are in terms of the body shape they contain, discarding the black areas in the background.
 
-2. **Comparing human poses:**
-
-TODO
+2. **Comparing human poses:** In this evaluation, we assess the performance of the SMPL model in replicating human poses based on pose landmarks. For comparison, we used MediaPipe Pose landmarks to extract 2D keypoints from both RGB images, since MediaPipe is trained on RGB images, and computed the Euclidean distance between corresponding landmarks. This metric provides an indication of how well the SMPL model matches the actual poses.
 
 #### Metrics
 
@@ -209,7 +207,15 @@ TODO
 
 2. **Comparing human poses:**
 
-TODO
+   - Pose Landmarks in the RGB image: x,y coordinates for the joints (e.g. elbow, knee, wrist, etc.) of the human body in the image, 33 pose landmarks
+
+   - Pose Landmarks in the 3D model image
+
+   - Euclidean distance between the pose landmarks: positional difference between corresponding joints 
+            
+   - Mean Euclidean distance across all landmarks: average positional difference between corresponding joints
+
+   - Mean Euclidean distance across all landmarks and images: average positional difference between corresponding joints over the entire dataset
 
 #### Implementation
 
@@ -218,7 +224,10 @@ This process generates two binary arrays, one for each image, where each value i
 
 2. **Comparing human poses:**
 
-TODO
+After applying the MediaPipe Pose landmark model on the dataset, it was observed that pose landmarks were often not detected when the subject was positioned far from the camera. To enhance detection accuracy, all images were cropped to bring the subject closer and more visible to the model.
+
+The process begins by creating a MediaPipe Pose model object. Both the RGB image and the 3D model image are loaded, converted to RGB format, and transformed into MediaPipe image objects. These images are then passed to the model, which outputs the pose landmarks in normalized coordinates (x, y, z). To facilitate pose analysis, MediaPipe's API for drawing and connecting landmarks on the images was utilized, and the images with drawn landmarks were saved for visualization purposes. The next step involves comparing the pose landmarks from the RGB image with those of the 3D model images. The Euclidean distance between corresponding landmarks is calculated for each frame. In cases where the MediaPipe model failed to detect landmarks, a Euclidean distance of 1 was assigned to those images. For each image, the mean Euclidean distance across all pose landmarks was calculated and saved in the JSON file along with the frame name.
+After analyzing all images, the mean Euclidean distance for all images was calculated. Images with distances marked as 1 (due to no detection) were excluded from the evaluation. Additionally, images with large distances were reviewed, revealing incorrect landmark placements in some cases. These images were also removed from the final analysis to ensure accurate and reliable results.
 
 #### Results
 
@@ -238,12 +247,32 @@ TODO
 
 2. **Comparing human poses:**
 
-TODO
+The mean Euclidean distance across all images was 0.043, indicating that, on average, the SMPL model keypoints differed by 4.3% of the image dimensions compared to the real human pose.
+
+![average frame rgb](./images/pose_average_rgb.png)
+
+![average frame model](./images/pose_average_model.png)
+
+   - Strong Performance: The SMPL model performed well in most cases, with 316 out of 406 images (77.8%) showing a mean Euclidean distance of less than 0.05. This indicates that the SMPL model is able to capture and replicate human poses with reasonable accuracy in the majority of frames.
+
+   - Outliers: The presence of some images with distances greater than 0.05 (90 images) suggests that in some instances, the model deviated more significantly from the true pose. The largest distance of 0.23 highlights occasional instances of substantial misalignment between the model and the real pose
+
+   The smallest mean Euclidean distance observed was 0.01, reflecting very close alignment between the SMPL model and the actual pose in that image.
+
+   ![Low distance frame rgb](./images/pose_small_difference_rgb.png)
+
+   ![Low distance frame model](./images/pose_small_difference_model.png)
+
+   The largest mean Euclidean distance recorded was 0.23, suggesting a more significant deviation between the SMPL model and the real pose in this case.
+
+   ![Big distance frame rgb](./images/pose_big_difference_rgb.png)
+
+   ![Big distance frame model](./images/pose_big_difference_model.png)
+
+The evaluation shows that the SMPL model generally performs well in replicating human poses, with a mean Euclidean distance of 0.043 across all images, indicating a deviation of only about 4.3% of the image dimensions on average. However, there are instances where the model's performance deviates, and further improvements may be needed to handle outlier poses where the distances exceed 0.05. Overall, the results indicate that the SMPL model is a reliable tool for pose replication, but with room for refinement in certain cases
 
 
 #### Live-Demo
-
-TODO
 
    - All images provided by the Live-Demo
      
@@ -267,8 +296,6 @@ The optional marker detection and assignment task would be the next step to inve
 
 ## Task Division
 
-TODO
-
 ### Abraham
 - Wrote the script compare_body_shapes_test.py
 - Processed evaluation dataset to calculate accuracy of the Avatar project
@@ -277,6 +304,14 @@ TODO
 - Wrote documentation
 
 ### Valdone
+- Researched possible evalutaion metrics
+- Researched models for pose estimation
+- Cropped all images
+- Wrote script for pose landmarks extraction, draw landmarks on image  and calculation of the mean Euclidean distance across all pose landmarks for each image
+- Wrote script for the evaluation (mean Euclidean distance over all images, smallest Euclidean distance, largest Euclidean distance, etc. )
+- Reviewed and removed images with wrong positioned landmarks
+- Evaluated the results for pose comparison
+- Wrote documentation
 
 ### Luke
 - Setup and integration of the project
@@ -288,3 +323,4 @@ TODO
 - Recorded evaluation datasets
 - Created illustrations for the poster
 - Wrote documentation
+- Poster Design
