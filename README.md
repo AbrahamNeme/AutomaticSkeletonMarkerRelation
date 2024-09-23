@@ -222,9 +222,7 @@ This executable can be used for recording necessary parts of an OpenARK dataset.
 1. **Comparing body shapes:** The script begins by loading two images (depth-image and SMPL-image). The images are initially preprocessed to facilitate the conversion to binary. This preprocessing includes creating and applying some color masks to the depth image to isolate the body shape and a grayscale conversion for both images, which reduces the number of color channels to one, facilitating the identification of black and non-black pixels. Once converted to grayscale, each image is analyzed pixel by pixel. The grayscale pixel values are compared to a threshold to determine whether they are black (value close to 0) or non-black (value other than 0). Based on this, a binary array is generated: If the pixel is black, a value of 0 is assigned. If the pixel is non-black, a value of 1 is assigned.
 This process generates two binary arrays, one for each image, where each value indicates whether the corresponding position in the image contains relevant information (human form) or black background. The comparison of the images is performed at the level of the binary arrays, only positions where at least one of the images has a value of 1, i.e. where there are non-black pixels, are considered. Within the relevant indices, cases where both images have a value of 1 are counted, indicating that both represent a shape at that position. Positions where both images have a 0 (black background) are discarded from the calculation, as they do not provide information about the shape. The similarity between the two images is calculated as the percentage of coincidences in the relevant pixels.
 
-2. **Comparing human poses:**
-
-After applying the MediaPipe Pose landmark model on the dataset, it was observed that pose landmarks were often not detected when the subject was positioned far from the camera. To enhance detection accuracy, all images were cropped to bring the subject closer and more visible to the model.
+2. **Comparing human poses:** After applying the MediaPipe Pose landmark model on the dataset, it was observed that pose landmarks were often not detected when the subject was positioned far from the camera. To enhance detection accuracy, all images were cropped to bring the subject closer and more visible to the model.
 
 The process begins by creating a MediaPipe Pose model object. Both the RGB image and the 3D model image are loaded, converted to RGB format, and transformed into MediaPipe image objects. These images are then passed to the model, which outputs the pose landmarks in normalized coordinates (x, y, z). To facilitate pose analysis, MediaPipe's API for drawing and connecting landmarks on the images was utilized, and the images with drawn landmarks were saved for visualization purposes. The next step involves comparing the pose landmarks from the RGB image with those of the 3D model images. The Euclidean distance between corresponding landmarks is calculated for each frame. In cases where the MediaPipe model failed to detect landmarks, a Euclidean distance of 1 was assigned to those images. For each image, the mean Euclidean distance across all pose landmarks was calculated and saved in the JSON file along with the frame name.
 After analyzing all images, the mean Euclidean distance for all images was calculated. Images with distances marked as 1 (due to no detection) were excluded from the evaluation. Additionally, images with large distances were reviewed, revealing incorrect landmark placements in some cases. These images were also removed from the final analysis to ensure accurate and reliable results.
@@ -269,7 +267,7 @@ The mean Euclidean distance across all images was 0.043, indicating that, on ave
 
    ![Big distance frame model](./images/pose_big_difference_model.png)
 
-The evaluation shows that the SMPL model generally performs well in replicating human poses, with a mean Euclidean distance of 0.043 across all images, indicating a deviation of only about 4.3% of the image dimensions on average. However, there are instances where the model's performance deviates, and further improvements may be needed to handle outlier poses where the distances exceed 0.05. Overall, the results indicate that the SMPL model is a reliable tool for pose replication, but with room for refinement in certain cases
+The evaluation shows that the SMPL model generally performs well in replicating simple human poses, with a mean Euclidean distance of 0.043 across all images, indicating a deviation of only about 4.3% of the image dimensions on average. However, as the complexity of the pose increased, such as with jumping or crouching, the error became more pronounced, reflecting the model's difficulty in capturing more intricate movements. Overall, the results indicate that the SMPL model is a reliable tool for pose replication, but with room for refinement in certain cases.
 
 
 #### Live-Demo
@@ -304,8 +302,7 @@ The optional marker detection and assignment task would be the next step to inve
 - Wrote documentation
 
 ### Valdone
-- Researched possible evalutaion metrics
-- Researched models for pose estimation
+- Researched possible evaluation metrics and models for pose estimation
 - Cropped all images
 - Wrote script for pose landmarks extraction, draw landmarks on image  and calculation of the mean Euclidean distance across all pose landmarks for each image
 - Wrote script for the evaluation (mean Euclidean distance over all images, smallest Euclidean distance, largest Euclidean distance, etc. )

@@ -9,6 +9,8 @@
 .vscode/
 *.code-workspace
 
+/dataset
+
 /3rdparty
 
 # Ignore build directories
