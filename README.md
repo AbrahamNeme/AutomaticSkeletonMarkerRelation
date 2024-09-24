@@ -4,7 +4,7 @@
 
 ## Poster
 
-![Poster](./images/poster.png)
+<img src="./images/poster.png" alt="Poster" width="600">
 
 ## Problem Description
 
