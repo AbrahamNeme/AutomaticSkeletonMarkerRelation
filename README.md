@@ -4,7 +4,7 @@
 
 ## Poster
 
-TODO
+![Poster](./images/poster.png)
 
 ## Problem Description
 
