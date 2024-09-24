@@ -37,6 +37,10 @@ To ensure the quality and functionality of the existing approach for fitting the
 
 ## Avatar Project
 
+### Overview
+
+![Pipeline](./images/pipeline.png)
+
 ### Dependencies
 
 The following configuration of the repository requires you to have Windows or Linux as your OS, as the Azure Kinect SDK is not available for macOS. The setup has only been thoroughly tested on Windows.
@@ -269,8 +273,6 @@ The evaluation shows that the SMPL model generally performs well in replicating 
 
 
 #### Live-Demo
-
-   - All images provided by the Live-Demo
      
 ![Avatar Project Evaluation](./images/avatar-project-evaluation.png) 
 
