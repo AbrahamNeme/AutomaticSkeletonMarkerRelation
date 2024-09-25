@@ -231,7 +231,7 @@ After analyzing all images, the mean Euclidean distance for all images was calcu
 
 #### Results
 
-1. **Comparing body shapes:** Through this test it was possible to demonstrate that the avatar project can achieve 80% or better accuracy in detecting and reproducing most simple postures, such as standing, stretching the arms out to the sides and upward, and walking in a straight line. However, it has difficulty detecting more complicated poses such as jumping, crouching or lying down, averaging between 50-60% accuracy. It shows even lower results of around 30% when it comes to poses that do not allow the program to observe and detect part of the person's body standing before the camera. In the end a total of 280 frames from the Live-Demo with a variety of poses were analysed and the average accuracy obtained was of 66.9%.
+1. **Comparing body shapes:** Through this test it was possible to demonstrate that the avatar project can achieve 80% or better accuracy in detecting and reproducing most simple postures, such as standing, stretching the arms out to the sides and upward, and walking in a straight line. However, it has difficulty detecting more complicated poses such as jumping, crouching or lying down, averaging between 50-60% accuracy. It shows even lower results of around 30% when it comes to poses that do not allow the program to observe and detect part of the person's body standing before the camera. In the end a total of 280 frames from the Live-Demo with a variety of poses were analysed and the average accuracy obtained was of 66.9%. A margin of error of ±10% is noted due to incomplete shape extractions from the depth images.
 
    - Extraction of human shape from depth images
      
